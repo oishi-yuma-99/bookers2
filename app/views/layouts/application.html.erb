@@ -5,47 +5,86 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <script src="https://kit.fontawesome.com/c5d2215689.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <header>
-      <li>
-        <%= link_to "Bookers", root_path%>
-      </li>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "Home", user_path(current_user.id)%>
-        </li>
-        <li>
-          <%= link_to "Users", users_path%>
-        </li>
-        <li>
-          <%= link_to "Books", books_path%>
-        </li>
-        <li>
-          <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "Home", root_path%>
-        </li>
-        <li>
-          <%= link_to "About", about_path%>
-        </li>
-        <li>
-          <%= link_to "Sign up", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "Log in", new_user_session_path %>
-        </li>
-      <% end %>
+    <header class="mb-3">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <span><%= link_to "Bookers", root_path, class: 'navbar-brand' %></span>
+          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to user_path(current_user.id), class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-house"></i> Home
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to users_path, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-users"></i> Users
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to books_path, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-book-open"></i> Books
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-right-from-bracket"></i> Log out
+              <% end %>
+            </li>
+            <% else %>
+            <li class="nav-item">
+            <%= link_to root_path, class: 'nav-link text-light' do %>
+              <i class="fa-solid fa-house"></i> Home
+            <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to about_path, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-link"></i> About
+            <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-user-plus"></i> Sign up
+            <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-right-to-bracket"></i> Log in
+              <% end %>
+            </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
-    <%= yield %>
+    
+    <main>
+      <div class="container">
+        <%= yield %>
+      </div>
+    </main>
+    
     <footer>
-      <p>CopyRight Infratop.inc</p>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
     </footer>
   </body>
 </html>
